@@ -199,7 +199,7 @@ class ICTDroidBuilder:
         
         logger.info(TAG, "Start to build test-bridge.apk")
         os.chdir(bridge_root)
-        ret_code = os.system('gradlew assembleRelease')
+        ret_code = os.system(f'.{os.path.sep}gradlew assembleRelease')
         if ret_code != 0:
             logger.error(TAG, f"Failed to build test-bridge: gradlew returned with non-zero code: {ret_code}")
             return
