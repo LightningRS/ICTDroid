@@ -151,9 +151,13 @@ class ICTDroidBuilder:
         
         logger.info(TAG, "Start to build ictdroid.jar")
         os.chdir(ctrl_root)
+        ret_code = os.system('mvn clean')
+        if ret_code != 0:
+            logger.error(TAG, f"Failed to build test-controller: mvn clean returned with non-zero code: {ret_code}")
+            return
         ret_code = os.system('mvn package')
         if ret_code != 0:
-            logger.error(TAG, f"Failed to build test-controller: mvn returned with non-zero code: {ret_code}")
+            logger.error(TAG, f"Failed to build test-controller: mvn package returned with non-zero code: {ret_code}")
             return
         os.chdir(self.root_dir)
         

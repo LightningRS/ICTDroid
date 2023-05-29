@@ -1,0 +1,44 @@
+name: ICTDroid CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Upgrade Gradle
+      uses: EdwarDDay/upgrade-gradle-action@v1.2.1
+      with:
+        working-directory: ./test-bridge
+    - name: Setup Maven
+      uses: stCarolas/setup-maven@v.4.5
+      with:
+        maven-version: 3.8.2
+    - name: Run Build Script
+      uses: jannekem/run-python-script-action@v1.6
+      with:
+        script: ./scripts/build.py
+    - name: Zip Release
+      uses: TheDoctor0/zip-release@0.7.1
+      with:
+        filename: build.zip
+        path: .
+        directory: ./build
+    - name: upload result
+      uses: actions/upload-artifact@v1
+      with:
+          name: build.zip
+          path: ${{ github.workspace }}/build.zip
