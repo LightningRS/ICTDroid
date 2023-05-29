@@ -1,0 +1,1704 @@
+{
+  "package": "com.farmerbb.taskbar",
+  "version": "1.0",
+  "components": [
+    {
+      "className": "com.farmerbb.taskbar.activity.MainActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN",
+            "android.intent.action.APPLICATION_PREFERENCES"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.LAUNCHER"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "1"
+              ],
+              "name": "theme_change",
+              "id": 1928,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "theme",
+              "id": 1988,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "name": "back_arrow",
+              "id": 1994,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "name": "title",
+              "id": 1995,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.IconPackApplyActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN",
+            "com.farmerbb.taskbar.APPLY_ICON_PACK"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "android.intent.extra.PACKAGE_NAME",
+              "id": 2108,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.DisableKeyboardService",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.view.InputMethod"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.StartMenuService",
+      "type": "s"
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.DisableHomeReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.DISABLE_HOME"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.SelectAppActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.DimScreenActivity",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.QuickSettingsTileService",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.quicksettings.action.QS_TILE"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.BackupRestoreActivity",
+      "type": "a",
+      "fullValueSet": {
+        "extras": {
+          "sendIntent": [
+            {
+              "name": "request_code",
+              "id": 622,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "name": "uri",
+              "id": 623,
+              "type": "Parcelable",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "request_code",
+              "id": 2098,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "name": "uri",
+              "id": 2099,
+              "objName": "android.net.Uri",
+              "type": "Parcelable",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.NotificationService",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "0",
+                "1"
+              ],
+              "name": "start_services",
+              "id": 1941,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1",
+                "0"
+              ],
+              "name": "start_services",
+              "id": 1974,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "start_services",
+              "id": 1982,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "start_services",
+              "id": 1996,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.StartTaskbarActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN",
+            "android.intent.action.CREATE_SHORTCUT"
+          ],
+          "sendIntent": [
+            "android.intent.action.MAIN"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ]
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "name": "android.intent.extra.shortcut.NAME",
+              "id": 1228,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "is_launching_shortcut",
+              "id": 50,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new android.content.Intent"
+              ],
+              "name": "android.intent.extra.shortcut.INTENT",
+              "id": 1221,
+              "type": "Parcelable",
+              "parentId": 0
+            },
+            {
+              "name": "android.intent.extra.shortcut.ICON_RESOURCE",
+              "id": 1227,
+              "type": "Parcelable",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.TaskerConditionReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.twofortyfouram.locale.intent.action.QUERY_CONDITION"
+          ]
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "com.twofortyfouram.locale.intent.extra.BUNDLE",
+              "id": 2160,
+              "type": "bundle",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.TaskerConditionActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.twofortyfouram.locale.intent.action.EDIT_CONDITION"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.EnableHomeReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.ENABLE_HOME"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.ShowHideTaskbarReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.SHOW_HIDE_TASKBAR"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.HomeActivityDelegate",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.ToggleFreeformModeReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.TOGGLE_FREEFORM_MODE"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.PowerMenuService",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.accessibilityservice.AccessibilityService"
+          ]
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "action",
+              "id": 2150,
+              "type": "int",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.TouchAbsorberActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.EnableFreeformReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.ENABLE_FREEFORM_MODE"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.TaskerActionActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.twofortyfouram.locale.intent.action.EDIT_SETTING"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.InvisibleActivityAlt",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.NavigationBarButtonsActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.BootReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.BOOT_COMPLETED"
+          ],
+          "recvIntent": [
+            "android.intent.action.BOOT_COMPLETED",
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.SelectAppActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.DashboardActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "cellId",
+              "id": 2103,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "name": "appWidgetId",
+              "id": 2010,
+              "type": "int",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.KeyboardShortcutActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN",
+            "android.intent.action.ASSIST"
+          ],
+          "recvIntent": [
+            "android.intent.action.MAIN",
+            "android.intent.action.ASSIST",
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT",
+            "android.intent.category.APP_MAPS"
+          ],
+          "recvIntent": [
+            "notEmpty",
+            "android.intent.category.APP_MAPS"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.ClearDataActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.ShortcutActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN",
+            "android.intent.action.CREATE_SHORTCUT"
+          ],
+          "sendIntent": [
+            "android.intent.action.MAIN",
+            "com.android.launcher.action.INSTALL_SHORTCUT"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "name": "android.intent.extra.shortcut.NAME",
+              "id": 1163,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "is_launching_shortcut",
+              "id": 1160,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new android.content.Intent"
+              ],
+              "name": "android.intent.extra.shortcut.INTENT",
+              "id": 1161,
+              "type": "Parcelable",
+              "parentId": 0
+            },
+            {
+              "name": "android.intent.extra.shortcut.ICON_RESOURCE",
+              "id": 1162,
+              "type": "Parcelable",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "0"
+              ],
+              "name": "duplicate",
+              "id": 639,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.InvisibleActivityAltDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.NotificationCountService",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.notification.NotificationListenerService"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.ImportSettingsActivity",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.FavoriteApp1",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.quicksettings.action.QS_TILE"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.FavoriteApp4",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.quicksettings.action.QS_TILE"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.FavoriteApp5",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.quicksettings.action.QS_TILE"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.FavoriteApp2",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.quicksettings.action.QS_TILE"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.FavoriteApp3",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.service.quicksettings.action.QS_TILE"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.SendSettingsReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.RECEIVE_SETTINGS"
+          ],
+          "sendIntent": [
+            "com.farmerbb.taskbar.RECEIVE_SETTINGS"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.PackageUpgradeReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MY_PACKAGE_REPLACED"
+          ],
+          "recvIntent": [
+            "android.intent.action.MY_PACKAGE_REPLACED"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.ContextMenuActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "args",
+              "id": 2120,
+              "body": [
+                {
+                  "name": "launched_from_start_menu",
+                  "id": 2123,
+                  "type": "boolean",
+                  "parentId": 2120
+                },
+                {
+                  "name": "y",
+                  "id": 2128,
+                  "type": "int",
+                  "parentId": 2120
+                },
+                {
+                  "name": "x",
+                  "id": 2127,
+                  "type": "int",
+                  "parentId": 2120
+                },
+                {
+                  "name": "is_start_button",
+                  "id": 2124,
+                  "type": "boolean",
+                  "parentId": 2120
+                },
+                {
+                  "name": "app_entry",
+                  "id": 2121,
+                  "type": "Serializable",
+                  "parentId": 2120
+                },
+                {
+                  "name": "desktop_icon",
+                  "id": 2122,
+                  "type": "Serializable",
+                  "parentId": 2120
+                },
+                {
+                  "name": "dont_show_quit",
+                  "id": 2126,
+                  "type": "boolean",
+                  "parentId": 2120
+                },
+                {
+                  "name": "is_overflow_menu",
+                  "id": 2125,
+                  "type": "boolean",
+                  "parentId": 2120
+                }
+              ],
+              "type": "bundle",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.InvisibleActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.EnableAdditionalSettingsActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.UninstallReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.PACKAGE_FULLY_REMOVED"
+          ],
+          "recvIntent": [
+            "android.intent.action.PACKAGE_FULLY_REMOVED"
+          ]
+        },
+        "datas": {
+          "ports": {
+            "manifest": [
+              ""
+            ]
+          },
+          "paths": {
+            "manifest": [
+              ""
+            ]
+          },
+          "schemes": {
+            "manifest": [
+              "package"
+            ],
+            "recvIntent": [
+              "notEmpty"
+            ]
+          },
+          "hosts": {
+            "manifest": [
+              ""
+            ]
+          }
+        },
+        "types": {
+          "manifest": [
+            ""
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.DesktopIconSelectAppActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.IconPackActivity",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.KeyboardShortcutActivityLockDevice",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ],
+          "recvIntent": [
+            "android.intent.action.MAIN",
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT",
+            "android.intent.category.APP_CALENDAR"
+          ],
+          "recvIntent": [
+            "android.intent.category.APP_CALENDAR",
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.DashboardActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.IconPackActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.ClearDataActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.HSLConfigActivity",
+      "type": "a",
+      "fullValueSet": {
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "1"
+              ],
+              "name": "return_to_settings",
+              "id": 643,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "return_to_settings",
+              "id": 2165,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.DummyActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "sendIntent": [
+            "android.intent.action.MAIN",
+            "new com.farmerbb.taskbar.c.a",
+            "android.intent.action.SET_WALLPAPER",
+            "android.search.action.GLOBAL_SEARCH"
+          ]
+        },
+        "categories": {
+          "sendIntent": [
+            "android.intent.category.LAUNCHER"
+          ]
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "1"
+              ],
+              "name": "finish_on_pause",
+              "id": 1480,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "show_permission_dialog",
+              "id": 1545,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "name": "user_id",
+              "id": 1319,
+              "type": "long",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "accessibility",
+              "id": 709,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "uninstall",
+              "id": 1318,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "show_recent_apps_dialog",
+              "id": 1139,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1"
+              ],
+              "name": "start_freeform_hack",
+              "id": 1947,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "user_id",
+              "id": 2159,
+              "type": "long",
+              "parentId": 0
+            },
+            {
+              "name": "uninstall",
+              "id": 2158,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.ReceiveSettingsReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.SEND_SETTINGS"
+          ],
+          "sendIntent": [
+            "com.farmerbb.taskbar.SEND_SETTINGS"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.ContextMenuActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.NavigationBarButtonsActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.PersistentShortcutLaunchActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ],
+          "sendIntent": [
+            "android.intent.action.MAIN"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ]
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "android.intent.extra.shortcut.NAME",
+              "id": 1099,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "package_name",
+              "id": 1093,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "component_name",
+              "id": 1094,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "null"
+              ],
+              "name": "window_size",
+              "id": 1092,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "user_id",
+              "id": 1095,
+              "type": "long",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new android.content.Intent"
+              ],
+              "name": "android.intent.extra.shortcut.INTENT",
+              "id": 1097,
+              "type": "Parcelable",
+              "parentId": 0
+            },
+            {
+              "name": "package_name",
+              "id": 58,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "component_name",
+              "id": 59,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "android.intent.extra.shortcut.ICON_RESOURCE",
+              "id": 1098,
+              "type": "Parcelable",
+              "parentId": 0
+            },
+            {
+              "name": "window_size",
+              "id": 908,
+              "type": "String",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "component_name",
+              "id": 2147,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "package_name",
+              "id": 2146,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "user_id",
+              "id": 2149,
+              "type": "long",
+              "parentId": 0
+            },
+            {
+              "name": "window_size",
+              "id": 2148,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.HSLActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT",
+            "android.intent.category.HOME"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.DisableFreeformReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.DISABLE_FREEFORM_MODE"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.DesktopIconSelectAppActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "desktop_icon",
+              "id": 2141,
+              "objName": "com.farmerbb.taskbar.c.i",
+              "type": "Serializable",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.SecondaryHomeActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT",
+            "android.intent.category.SECONDARY_HOME"
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.QuitReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.QUIT"
+          ],
+          "sendIntent": [
+            "com.farmerbb.taskbar.QUIT"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.StartReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.farmerbb.taskbar.START"
+          ],
+          "sendIntent": [
+            "com.farmerbb.taskbar.START"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.receiver.TaskerActionReceiver",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "com.twofortyfouram.locale.intent.action.FIRE_SETTING"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "com.twofortyfouram.locale.intent.extra.BUNDLE",
+              "id": 2153,
+              "body": [
+                {
+                  "name": "com.farmerbb.taskbar.STRING_MESSAGE",
+                  "id": 2154,
+                  "type": "String",
+                  "parentId": 2153
+                }
+              ],
+              "type": "bundle",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.TaskbarService",
+      "type": "s"
+    },
+    {
+      "className": "com.farmerbb.taskbar.service.DashboardService",
+      "type": "s"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.dark.PersistentShortcutSelectAppActivityDark",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.EnableAdditionalSettingsActivity",
+      "type": "a"
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.InvisibleActivityFreeform",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "1"
+              ],
+              "name": "check_multiwindow",
+              "id": 1,
+              "type": "boolean",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.PersistentShortcutSelectAppActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN",
+            "android.intent.action.CREATE_SHORTCUT"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "schemes": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          }
+        },
+        "extras": {
+          "recvIntent": [
+            {
+              "name": "qs_tile",
+              "id": 2100,
+              "type": "int",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "com.farmerbb.taskbar.activity.HomeActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT",
+            "android.intent.category.HOME"
+          ]
+        }
+      }
+    }
+  ]
+}

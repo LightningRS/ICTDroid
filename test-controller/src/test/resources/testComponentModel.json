@@ -1,0 +1,446 @@
+{
+  "package": "aarddict.android",
+  "version": "1.0",
+  "components": [
+    {
+      "className": "aarddict.android.DictionaryInfoActivity",
+      "type": "a",
+      "fullValueSet": {
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "volumeId",
+              "id": 5,
+              "type": "String",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "volumeId",
+              "id": 246,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.ArticleViewActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "android.intent.action.SEARCH",
+            "notEmpty",
+            "android.intent.action.SEND"
+          ]
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "volumeId",
+              "id": 3,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new long"
+              ],
+              "name": "articlePointer",
+              "id": 4,
+              "type": "long",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "word",
+              "id": 1,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "new java.lang.String"
+              ],
+              "name": "section",
+              "id": 2,
+              "type": "String",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "articlePointer",
+              "id": 256,
+              "type": "long",
+              "parentId": 0
+            },
+            {
+              "name": "section",
+              "id": 254,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "volumeId",
+              "id": 255,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "word",
+              "id": 253,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "android.intent.extra.TEXT",
+              "id": 239,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "query",
+              "id": 236,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.Article",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.SEARCH",
+            "android.intent.action.SEND"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.Lookup",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.SEARCH"
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.DictionaryService",
+      "type": "s",
+      "fullValueSet": {
+        "actions": {
+          "recvIntent": [
+            "android.intent.action.VIEW",
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "ports": {
+            "recvIntent": [
+              "mPort"
+            ]
+          },
+          "paths": {
+            "recvIntent": [
+              "notEmpty"
+            ]
+          },
+          "schemes": {
+            "recvIntent": [
+              "mSheme",
+              "notEmpty"
+            ]
+          },
+          "hosts": {
+            "recvIntent": [
+              "mHost"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.LookupActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MAIN"
+          ],
+          "sendIntent": [
+            "android.intent.action.SEARCH"
+          ],
+          "recvIntent": [
+            "android.intent.action.SEARCH",
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.LAUNCHER"
+          ]
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "values": [
+                "null"
+              ],
+              "name": "query",
+              "id": 234,
+              "type": "String",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "query",
+              "id": 240,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.DictionaryService$3",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.MEDIA_EJECT",
+            "android.intent.action.MEDIA_BAD_REMOVAL",
+            "android.intent.action.MEDIA_REMOVED"
+          ],
+          "recvIntent": [
+            "notEmpty"
+          ]
+        },
+        "datas": {
+          "ports": {
+            "manifest": [
+              ""
+            ]
+          },
+          "paths": {
+            "manifest": [
+              ""
+            ]
+          },
+          "schemes": {
+            "manifest": [
+              "file"
+            ],
+            "recvIntent": [
+              "notEmpty"
+            ]
+          },
+          "hosts": {
+            "manifest": [
+              ""
+            ]
+          }
+        },
+        "types": {
+          "manifest": [
+            ""
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.BaseDictionaryActivity$2",
+      "type": "r",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "aarddict.android.DictionaryService.DISCOVERY_FINISHED",
+            "aarddict.android.DictionaryService.OPEN_STARTED",
+            "aarddict.android.DictionaryService.DICT_OPEN_FAILED",
+            "aarddict.android.DictionaryService.OPENED_DICT",
+            "aarddict.android.DictionaryService.OPEN_FINISHED",
+            "aarddict.android.DictionaryService.DISCOVERY_STARTED"
+          ],
+          "sendIntent": [
+            "aarddict.android.DictionaryService.OPEN_STARTED",
+            "aarddict.android.DictionaryService.DISCOVERY_FINISHED",
+            "aarddict.android.DictionaryService.DICT_OPEN_FAILED",
+            "aarddict.android.DictionaryService.OPENED_DICT",
+            "aarddict.android.DictionaryService.OPEN_FINISHED",
+            "aarddict.android.DictionaryService.DISCOVERY_STARTED"
+          ],
+          "recvIntent": [
+            "aarddict.android.DictionaryService.DISCOVERY_FINISHED",
+            "aarddict.android.DictionaryService.OPEN_STARTED",
+            "aarddict.android.DictionaryService.DICT_OPEN_FAILED",
+            "aarddict.android.DictionaryService.OPENED_DICT",
+            "aarddict.android.DictionaryService.OPEN_FINISHED",
+            "aarddict.android.DictionaryService.DISCOVERY_STARTED"
+          ]
+        },
+        "extras": {
+          "sendIntent": [
+            {
+              "name": "count",
+              "id": 72,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "1",
+                "0"
+              ],
+              "name": "displayErrorMessage",
+              "id": 74,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "name": "reason",
+              "id": 73,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "title",
+              "id": 26,
+              "type": "CharSequence",
+              "parentId": 0
+            },
+            {
+              "values": [
+                "0"
+              ],
+              "name": "i",
+              "id": 75,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "name": "file",
+              "id": 71,
+              "type": "String",
+              "parentId": 0
+            }
+          ],
+          "recvIntent": [
+            {
+              "name": "displayErrorMessage",
+              "id": 243,
+              "type": "boolean",
+              "parentId": 0
+            },
+            {
+              "name": "count",
+              "id": 241,
+              "type": "int",
+              "parentId": 0
+            },
+            {
+              "name": "reason",
+              "id": 245,
+              "type": "String",
+              "parentId": 0
+            },
+            {
+              "name": "file",
+              "id": 244,
+              "type": "String",
+              "parentId": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "className": "aarddict.android.DictionariesActivity",
+      "type": "a",
+      "fullValueSet": {
+        "actions": {
+          "manifest": [
+            "android.intent.action.VIEW"
+          ],
+          "sendIntent": [
+            "aarddict.android.ACTION_NO_DICTIONARIES"
+          ],
+          "recvIntent": [
+            "android.intent.action.VIEW",
+            "aarddict.android.ACTION_NO_DICTIONARIES",
+            "notEmpty"
+          ]
+        },
+        "categories": {
+          "manifest": [
+            "android.intent.category.DEFAULT"
+          ]
+        },
+        "datas": {
+          "ports": {
+            "manifest": [
+              ""
+            ],
+            "recvIntent": [
+              "mPort"
+            ]
+          },
+          "paths": {
+            "manifest": [
+              ""
+            ],
+            "recvIntent": [
+              "notEmpty"
+            ]
+          },
+          "schemes": {
+            "manifest": [
+              "file"
+            ],
+            "recvIntent": [
+              "mSheme",
+              "notEmpty"
+            ]
+          },
+          "hosts": {
+            "manifest": [
+              ""
+            ],
+            "recvIntent": [
+              "mHost"
+            ]
+          }
+        },
+        "types": {
+          "manifest": [
+            ""
+          ]
+        }
+      }
+    }
+  ]
+}

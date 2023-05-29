@@ -1,0 +1,6 @@
+.vscode
+build/
+logs/
+__pycache__
+lib/*
+!lib/ICCBot.zip

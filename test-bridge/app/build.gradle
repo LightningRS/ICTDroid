@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    signingConfigs {
+        debug {
+            storeFile file('platform.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "org.square16.ictdroid.testbridge"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            signingConfig android.signingConfigs.debug
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig android.signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    namespace 'org.square16.ictdroid.testbridge'
+}
+
+dependencies {
+    implementation 'com.alibaba:fastjson:1.2.79'
+    implementation 'com.github.getActivity:XXPermissions:13.5'
+    implementation 'androidx.fragment:fragment:1.5.7'
+    implementation 'com.opencsv:opencsv:5.6'
+    implementation 'commons-codec:commons-codec:1.15'
+}
+
+configurations {
+    all {
+        exclude module: 'commons-logging'
+    }
+}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="60 seconds">
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <appender name="CONSOLE-LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>logger.contains("LogcatMonitor")</expression>
+            </evaluator>
+            <OnMatch>DENY</OnMatch>
+            <OnMismatch>NEUTRAL</OnMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %thread %level %logger{36} [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--<appender name="FILE-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <appender name="FILE-LOG" class="ch.qos.logback.core.FileAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>logger.contains("LogcatMonitor")</expression>
+            </evaluator>
+            <OnMatch>DENY</OnMatch>
+            <OnMismatch>NEUTRAL</OnMismatch>
+        </filter>
+        <file>logs/test-controller-${bySecond}.log</file>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %thread %level %logger{36} [%file:%line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/test-controller-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        -->
+    </appender>
+
+    <appender name="LOGCAT-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/logcat-${bySecond}.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/logcat-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="GENERATED-SUT" class="ch.qos.logback.core.FileAppender">
+        <file>logs/generated-sut-${bySecond}.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] %thread %level %logger{36} [%file:%line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/logcat-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>-->
+    </appender>
+
+    <logger name="org.reflections.Reflections" level="WARN"/>
+    <logger name="ch.qos.logback.*" level="WARN"/>
+    <logger name="org.square16.ictdroid.logcat.LogcatMonitor" level="DEBUG">
+        <appender-ref ref="LOGCAT-LOG"/>
+    </logger>
+    <logger name="org.square16.ictdroid.testcase.ACTSTestcaseBuilder">
+        <appender-ref ref="CONSOLE-LOG"/>
+        <appender-ref ref="FILE-LOG"/>
+        <appender-ref ref="GENERATED-SUT"/>
+    </logger>
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE-LOG"/>
+        <appender-ref ref="FILE-LOG"/>
+    </root>
+</configuration>

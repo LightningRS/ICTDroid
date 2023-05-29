@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AppTestClient</string>
+    <string name="loading_wait">Loading, please wait...</string>
+    <string name="loading_service">Waiting for TestService...</string>
+    <string name="loading_unknown">Unknown message</string>
+    <string name="btn_test">TEST</string>
+</resources>
