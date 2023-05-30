@@ -71,9 +71,18 @@ public class TestController {
             // Initialize logcat
             this.logcatMonitor.start();
 
-            // Restart test bridge
-            adb.forceStopApp(Constants.CLIENT_PKG_NAME);
-            adb.startActivity(Constants.CLIENT_PKG_NAME, Constants.CLIENT_ACT_NAME);
+            if (GlobalConfig.getBridgePort() == 0) {
+                // Restart test bridge
+                adb.forceStopApp(Constants.CLIENT_PKG_NAME);
+                // We have to stop all apps for at least once.
+                for (Path apkPath : this.apksPath) {
+                    this.loadApk(apkPath);
+                    adb.forceStopApp(currAppModel.getPackageName());
+                }
+                adb.startActivity(Constants.CLIENT_PKG_NAME, Constants.CLIENT_ACT_NAME);
+            } else {
+                this.initRPC(GlobalConfig.getBridgePort());
+            }
 
             // Wait until RPCController ready
             while (rpcController == null || !rpcController.isReady()) {

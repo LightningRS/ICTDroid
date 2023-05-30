@@ -29,11 +29,12 @@ public class Config {
     private Integer startCaseIndex;
     private String startStrategy;
     private int defaultStrength;
-    private Boolean withManifest;
 
-    // ========= Value Provider Options =========
+    private Boolean withManifest;
     private Boolean withRandom;
     private Boolean withPresetAndBoundary;
+
+    private Integer bridgePort;
     private JSONObject MISTResult;
 
     private Config() {

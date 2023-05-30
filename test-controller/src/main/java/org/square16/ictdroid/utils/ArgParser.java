@@ -158,6 +158,7 @@ public class ArgParser {
                 config.setTestGenMode(TestGenMode.NONE);
             }
         }
+        config.setBridgePort(cmd.hasOption("bp") ? Integer.parseInt(cmd.getOptionValue("bp")) : 0);
         return true;
     }
 
@@ -221,6 +222,8 @@ public class ArgParser {
                 "Android default launcher package name. Example: com.android.launcher3");
         options.addOption("d", "device", true,
                 "Serial number of Android device. Default=null");
+        options.addOption("bp", "bridge-port", true,
+                "Port number of test bridge. Default to auto-detect.");
         options.addOption("ce", "continue-if-error", false,
                 "Continue if error occurred when testing components. If not specified, default is false");
 
