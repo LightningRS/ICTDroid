@@ -127,7 +127,7 @@ public class CompStateMonitor {
 
     private void checkByDumpSys() {
         String dumpSysType = switch (this.compType) {
-            case CompModel.TYPE_ACTIVITY -> "window windows";
+            case CompModel.TYPE_ACTIVITY -> "window";
             case CompModel.TYPE_SERVICE -> "service";
             default -> null;
         };
