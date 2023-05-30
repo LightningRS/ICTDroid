@@ -38,7 +38,7 @@ public class CSVTestCaseMgr {
     private final ArrayList<String[]> cases = new ArrayList<>();
 
     public CSVTestCaseMgr(String pkgName, String compName, String strategy) throws FileNotFoundException {
-        this(pkgName, compName, strategy, "/storage/emulated/0/ICCBot/testcases");
+        this(pkgName, compName, strategy, "/storage/emulated/0/ICTDroid/testcases");
     }
 
     public CSVTestCaseMgr(String pkgName, String compName, String strategy, String rootPath) throws FileNotFoundException {

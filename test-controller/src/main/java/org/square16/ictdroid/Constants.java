@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Constants {
-    public static final String CLIENT_PKG_NAME = "com.test.apptestclient";
+    public static final String CLIENT_PKG_NAME = "org.square16.ictdroid.testbridge";
     public static final String CLIENT_ACT_NAME = CLIENT_PKG_NAME + ".activities.MainActivity";
     public static final String CLIENT_COMP_NAME = CLIENT_PKG_NAME + "/.activities.MainActivity";
-    public static final String CLIENT_CASE_ROOT = "/sdcard/ICCBot/testcases";
+    public static final String CLIENT_CASE_ROOT = "/sdcard/ICTDroid/testcases";
 
     public static final String MIST_TYPE_MAY_IA = "mayIA";
     public static final String MIST_TYPE_MUST_IA = "mustIA";
