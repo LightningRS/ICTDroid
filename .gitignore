@@ -1,6 +1,6 @@
 .vscode
 build/
+build-*/
 logs/
 __pycache__
-lib/*
-!lib/ICCBot.zip
+lib/platform-tools.zip

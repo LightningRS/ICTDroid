@@ -26,6 +26,7 @@ class ICTDroidBuilder:
     def start(self):
         self.init_dirs()
         self.build_iccbot()
+        self.build_mist()
         self.build_adb()
         self.build_controller()
         self.build_bridge()
@@ -75,6 +76,33 @@ class ICTDroidBuilder:
         logger.info(TAG, "Finished unzipping ICCBot")
 
         logger.info(TAG, "Finished building ICCBot")
+    
+    def build_mist(self):
+        TAG = 'build_mist'
+
+        mist_path = os.path.join(self.lib_path, 'Mist')
+        mist_jar_path = os.path.join(mist_path, 'Mist.jar')
+        apktool_jar_path = os.path.join(self.lib_path, 'apktool.jar')
+        if os.path.exists(mist_path) and os.path.exists(mist_jar_path) and os.path.exists(apktool_jar_path):
+            logger.info(TAG, "Mist.jar already exists, skip build")
+            return
+        
+        # Unzip Mist
+        mist_pack_path = os.path.join(self.root_dir, 'lib/Mist.zip')
+        if not os.path.exists(mist_pack_path):
+            logger.error(TAG, "Failed to build Mist: lib/Mist.zip not found!")
+            return
+        apktool_path = os.path.join(self.root_dir, 'lib/apktool.jar')
+        if not os.path.exists(apktool_path):
+            logger.error(TAG, "Failed to build Mist: lib/apktool.jar not found!")
+            return
+        logger.info(TAG, "Unzipping Mist...")
+        with zipfile.ZipFile(mist_pack_path) as f:
+            f.extractall(mist_path)
+        shutil.copy(apktool_path, apktool_jar_path)
+        logger.info(TAG, "Finished unzipping Mist")
+
+        logger.info(TAG, "Finished building Mist")
     
     def build_adb(self):
         TAG = 'build_adb'
@@ -177,7 +205,7 @@ class ICTDroidBuilder:
 
         # Copy scripts
         target_scripts_path = os.path.join(self.build_root, 'scripts')
-        scripts_path = os.path.join(ctrl_root, 'scripts')
+        scripts_path = os.path.join(self.root_dir, 'scripts/execute')
         shutil.copytree(scripts_path, target_scripts_path, dirs_exist_ok=True)
         
         logger.info(TAG, "Finished building ictdroid.jar")
