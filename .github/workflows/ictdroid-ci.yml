@@ -34,50 +34,32 @@ jobs:
     # Build for Windows
     - name: Run Build Script for Windows
       run: python ./scripts/build.py windows
-    - name: Zip Release for Windows
-      uses: TheDoctor0/zip-release@0.7.1
-      with:
-        filename: ${{ github.workspace }}/ICTDroid-windows-x64.zip
-        path: .
-        directory: ./build
     - name: Upload Windows Build
       uses: actions/upload-artifact@v3
       with:
           name: ICTDroid-windows-x64
-          path: ${{ github.workspace }}/ICTDroid-windows-x64.zip
+          path: build/
     - name: Remove Build Directory
       run: rm -rf ./build
     
     # Build for Linux
     - name: Run Build Script for Linux
       run: python ./scripts/build.py linux
-    - name: Zip Release for Linux
-      uses: TheDoctor0/zip-release@0.7.1
-      with:
-        filename: ${{ github.workspace }}/ICTDroid-linux-x64.zip
-        path: .
-        directory: ./build
     - name: Upload Linux Build
       uses: actions/upload-artifact@v3
       with:
-          name: ICTDroid-windows-x64
-          path: ${{ github.workspace }}/ICTDroid-linux-x64.zip
+          name: ICTDroid-linux-x64
+          path: build/
     - name: Remove Build Directory
       run: rm -rf ./build
 
     # Build for Mac OS X
     - name: Run Build Script for Mac OS X
       run: python ./scripts/build.py macosx
-    - name: Zip Release for Mac OS X
-      uses: TheDoctor0/zip-release@0.7.1
-      with:
-        filename: ${{ github.workspace }}/ICTDroid-darwin-x64.zip
-        path: .
-        directory: ./build
     - name: Upload Mac OS X Build
       uses: actions/upload-artifact@v3
       with:
           name: ICTDroid-darwin-x64
-          path: ${{ github.workspace }}/ICTDroid-darwin-x64.zip
+          path: build/
     - name: Remove Build Directory
       run: rm -rf ./build
