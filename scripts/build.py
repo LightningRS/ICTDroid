@@ -210,6 +210,9 @@ class ICTDroidBuilder:
         scripts_path = os.path.join(self.root_dir, 'scripts/execute')
         shutil.copytree(scripts_path, target_scripts_path, dirs_exist_ok=True)
 
+        # Copy requirements.txt
+        shutil.copy(os.path.join(self.root_dir, 'requirements.txt'), os.path.join(self.build_root, 'requirements.txt'))
+
         logger.info(TAG, "Finished building ictdroid.jar")
 
     def build_bridge(self):
