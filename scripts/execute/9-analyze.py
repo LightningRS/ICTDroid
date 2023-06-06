@@ -646,10 +646,24 @@ class ControllerLogAnalyzer:
         elif len(known_cases) > 0:
             known_case = known_cases[0]
         if self.curr_case in known_cases:
-            logger.fatal(TAG, "Case not in known_cases")
-            raise RuntimeError("Case not in known_cases")
+            logger.fatal(TAG, "Case should not in known_cases")
+            raise RuntimeError("Case should not in known_cases")
         else:
             known_cases.append(self.curr_case)
+
+        # Double-check whether the component state is different with the known case.
+        # If the state changed from other to FAILED, we should replace the known case.
+        if known_case is not None:
+            if known_case.comp_state != 'FAILED' and self.curr_case.comp_state == 'FAILED':
+                logger.warning(TAG, f"comp_state changed from {known_case.comp_state} to {self.curr_case.comp_state}: "
+                                    f"case {self.curr_case.case_index} of {self.curr_case.comp_qualified_name}")
+                known_cases[0] = self.curr_case
+                known_cases[-1] = known_case
+                known_case = None
+            elif self.curr_case.comp_state != known_case.comp_state:
+                logger.debug(TAG, f"Inconsistent comp_state! known={known_case.comp_state}, "
+                                  f"current={self.curr_case.comp_state}: case {self.curr_case.case_index} of "
+                                  f"{self.curr_case.comp_qualified_name}")
 
         if known_case is None:
             # Stacktrace (case) is unique
@@ -683,12 +697,9 @@ class ControllerLogAnalyzer:
         else:
             self.curr_case.uniq_err_id = known_case.uniq_err_id
             self.curr_case.uniq_crash_id = known_case.uniq_crash_id
-            if self.curr_case.comp_state != known_case.comp_state:
-                logger.warning(TAG, f"Inconsistent comp_state! before={known_case.comp_state}, "
-                                    f"current={self.curr_case.comp_state}")
-                # if self.curr_case.comp_state == 'FAILED':
-                #     self.uniq_crash_cnt += 1
-                #     self.curr_case.uniq_crash_id = self.uniq_crash_cnt
+            # if self.curr_case.comp_state == 'FAILED':
+            #     self.uniq_crash_cnt += 1
+            #     self.curr_case.uniq_crash_id = self.uniq_crash_cnt
         return False
 
     def check_trace_relevant_to_pkg(self, trace_blocks: List[TraceBlock]):
@@ -846,9 +857,12 @@ class ICTDroidResultAnalyzer:
         return 'Finished running testcase' in self.curr_log_group.controller
 
     def analyze_dynamic_test_log(self, result_dir: str):
+        TAG = 'analyze_dynamic_test_log'
+
         ctrl_log = self.curr_log_group.controller
         log_analyzer = ControllerLogAnalyzer(ctrl_log, result_dir, self.testcase_dir)
         log_analyzer.start()
+        logger.info(TAG, "====================================")
 
 
 if __name__ == '__main__':

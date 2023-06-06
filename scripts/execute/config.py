@@ -2,7 +2,7 @@
 # ! -*- coding: utf-8 -*-
 
 import os
-import shutil
+import platform
 
 ### Java Path
 JAVA_PATH = '/path/to/java17+'
@@ -21,7 +21,9 @@ STR_LEN_MAX = None
 
 ROOT_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-ADB_PATH = os.path.join(ROOT_PATH, "adb.exe")
+ADB_PATH = os.path.join(ROOT_PATH, "adb")
+if platform.system().lower().startswith('win'):
+    ADB_PATH += '.exe'
 ICCBOT_ROOT_PATH = os.path.join(ROOT_PATH, "lib/ICCBot")
 
 ICTDROID_JAR_PATH = os.path.join(ROOT_PATH, "ictdroid.jar")
@@ -39,7 +41,7 @@ if not os.path.exists(JAVA_PATH):
     exit(0)
 
 if not os.path.exists(ADB_PATH):
-    print("adb.exe not found!")
+    print("adb executable not found!")
     exit(0)
 
 if not os.path.exists(ICTDROID_JAR_PATH):
