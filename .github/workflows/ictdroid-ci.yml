@@ -2,9 +2,9 @@ name: ICTDroid CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
 
 permissions:
   contents: read
@@ -13,16 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
-    # - name: Upgrade Gradle
-    #   uses: EdwarDDay/upgrade-gradle-action@v1.2.1
-    #   with:
-    #     working-directory: ./test-bridge
     - name: Setup Maven
       uses: stCarolas/setup-maven@v.4.5
       with:
@@ -33,16 +30,54 @@ jobs:
         python-version: '3.10'
     - name: Install Python Requirements
       run: python -m pip install requests coloredlogs
-    - name: Run Build Script
-      run: python ./scripts/build.py
-    - name: Zip Release
+    
+    # Build for Windows
+    - name: Run Build Script for Windows
+      run: python ./scripts/build.py windows
+    - name: Zip Release for Windows
       uses: TheDoctor0/zip-release@0.7.1
       with:
-        filename: ${{ github.workspace }}/build.zip
+        filename: ${{ github.workspace }}/ICTDroid-windows-x64.zip
         path: .
         directory: ./build
-    - name: upload result
-      uses: actions/upload-artifact@v1
+    - name: Upload Windows Build
+      uses: actions/upload-artifact@v3
       with:
-          name: build.zip
-          path: ${{ github.workspace }}/build.zip
+          name: ICTDroid-windows-x64
+          path: ${{ github.workspace }}/ICTDroid-windows-x64.zip
+    - name: Remove Build Directory
+      run: rm -rf ./build
+    
+    # Build for Linux
+    - name: Run Build Script for Linux
+      run: python ./scripts/build.py linux
+    - name: Zip Release for Linux
+      uses: TheDoctor0/zip-release@0.7.1
+      with:
+        filename: ${{ github.workspace }}/ICTDroid-linux-x64.zip
+        path: .
+        directory: ./build
+    - name: Upload Linux Build
+      uses: actions/upload-artifact@v3
+      with:
+          name: ICTDroid-windows-x64
+          path: ${{ github.workspace }}/ICTDroid-linux-x64.zip
+    - name: Remove Build Directory
+      run: rm -rf ./build
+
+    # Build for Mac OS X
+    - name: Run Build Script for Mac OS X
+      run: python ./scripts/build.py macosx
+    - name: Zip Release for Mac OS X
+      uses: TheDoctor0/zip-release@0.7.1
+      with:
+        filename: ${{ github.workspace }}/ICTDroid-darwin-x64.zip
+        path: .
+        directory: ./build
+    - name: Upload Mac OS X Build
+      uses: actions/upload-artifact@v3
+      with:
+          name: ICTDroid-darwin-x64
+          path: ${{ github.workspace }}/ICTDroid-darwin-x64.zip
+    - name: Remove Build Directory
+      run: rm -rf ./build

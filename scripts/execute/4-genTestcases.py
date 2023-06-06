@@ -2,26 +2,27 @@
 # ! -*- coding: utf-8 -*-
 
 import os
+import subprocess
+import sys
 
 import config
 
-ICTDROID_EXTRA = ''
+ICTDROID_CMD = [
+    config.JAVA_PATH, '-jar', config.ICTDROID_JAR_PATH,
+    '-k', config.APKS_PATH,
+    '-i', config.ICCBOT_RESULT_PATH,
+    '-c', config.TESTCASE_PATH,
+    '-og',  # Generate only (without dynamic test)
+    '-oe',  # Only exported component
+]
 if config.SCOPE_CFG_PATH is not None:
-    ICTDROID_EXTRA += ' -o "{config.SCOPE_CFG_PATH}"'.format(config=config)
+    ICTDROID_CMD.extend(['-o', str(config.SCOPE_CFG_PATH)])
 if config.RAND_SEED is not None:
-    ICTDROID_EXTRA += ' -s "{config.RAND_SEED}"'.format(config=config)
+    ICTDROID_CMD.extend(['-s', str(config.RAND_SEED)])
 if config.STR_LEN_MIN is not None:
-    ICTDROID_EXTRA += ' -smin "{config.STR_LEN_MIN}"'.format(config=config)
+    ICTDROID_CMD.extend(['-smin', str(config.STR_LEN_MIN)])
 if config.STR_LEN_MAX is not None:
-    ICTDROID_EXTRA += ' -smax "{config.STR_LEN_MAX}"'.format(config=config)
-
-ICTDROID_CMD = '{config.JAVA_PATH} -jar "{config.ICTDROID_JAR_PATH}" '
-ICTDROID_CMD += '-k "{config.APKS_PATH}" -i "{config.ICCBOT_RESULT_PATH}" '
-ICTDROID_CMD += '-c "{config.TESTCASE_PATH}" '
-# ICTDROID_CMD += '-st "{config.STRATEGIES} '
-ICTDROID_CMD += '-og'
-ICTDROID_CMD = ICTDROID_CMD.format(config=config) + ICTDROID_EXTRA
-print(ICTDROID_CMD)
+    ICTDROID_CMD.extend(['-smax', str(config.STR_LEN_MAX)])
 
 if not os.path.exists(config.JAVA_PATH):
     print("Java.exe not found!")
@@ -31,7 +32,10 @@ if not os.path.exists(config.ICTDROID_JAR_PATH):
     print("ictdroid.jar not found!")
     exit(0)
 
-if os.system(ICTDROID_CMD) != 0:
-    print("Failed to call ICTDroid! cmd={}".format(ICTDROID_CMD))
+print("Running ICTDroid...")
+print(ICTDROID_CMD)
+proc = subprocess.run(ICTDROID_CMD, cwd=config.ROOT_PATH, stdout=sys.stdout, stderr=sys.stdout)
+if proc.returncode != 0:
+    print("Error when running ICTDroid")
 else:
-    print("Finished calling ICTDroid")
+    print("Finshed running ICTDroid")

@@ -8,9 +8,6 @@ from xml.etree import cElementTree as ET
 
 import config
 
-# !/usr/bin/python3
-# ! -*- coding: utf-8 -*-
-
 ENTRY_METHODS = ['onCreate', 'onStart', 'onResume']
 
 

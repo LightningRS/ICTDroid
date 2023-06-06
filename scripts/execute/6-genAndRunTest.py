@@ -2,29 +2,32 @@
 # ! -*- coding: utf-8 -*-
 
 import os
+import subprocess
+import sys
 
 import config
 
-ICTDROID_EXTRA = ''
+ICTDROID_CMD = [
+    config.JAVA_PATH, '-jar', config.ICTDROID_JAR_PATH,
+    '-k', config.APKS_PATH,
+    '-i', config.ICCBOT_RESULT_PATH,
+    '-c', config.TESTCASE_PATH,
+    '-a', config.ADB_PATH,
+    '-ln', config.LAUNCHER_PKG_NAME,
+    '-ag',  # Automatically generate testcases if not exists
+    '-oe',  # Only exported component
+    '-ce',  # Continue when error
+]
 if config.SCOPE_CFG_PATH is not None:
-    ICTDROID_EXTRA += ' -o "{config.SCOPE_CFG_PATH}"'.format(config=config)
+    ICTDROID_CMD.extend(['-o', str(config.SCOPE_CFG_PATH)])
 if config.RAND_SEED is not None:
-    ICTDROID_EXTRA += ' -s "{config.RAND_SEED}"'.format(config=config)
+    ICTDROID_CMD.extend(['-s', str(config.RAND_SEED)])
 if config.STR_LEN_MIN is not None:
-    ICTDROID_EXTRA += ' -smin "{config.STR_LEN_MIN}"'.format(config=config)
+    ICTDROID_CMD.extend(['-smin', str(config.STR_LEN_MIN)])
 if config.STR_LEN_MAX is not None:
-    ICTDROID_EXTRA += ' -smax "{config.STR_LEN_MAX}"'.format(config=config)
-if config.DEVICE_SERIAL is not None:
-    ICTDROID_EXTRA += ' -d "{config.DEVICE_SERIAL}"'.format(config=config)
-
-ICTDROID_CMD = '{config.JAVA_PATH} -jar "{config.ICTDROID_JAR_PATH}" '
-ICTDROID_CMD += '-k "{config.APKS_PATH}" -i "{config.ICCBOT_RESULT_PATH}" '
-ICTDROID_CMD += '-c "{config.TESTCASE_PATH}" '
-# ICTDROID_CMD += '-st "{config.STRATEGIES}" '
-ICTDROID_CMD += '-a "{config.ADB_PATH}" -ln "{config.LAUNCHER_PKG_NAME}" '
-ICTDROID_CMD += '-ag -ce'
-ICTDROID_CMD = ICTDROID_CMD.format(config=config) + ICTDROID_EXTRA
-print(ICTDROID_CMD)
+    ICTDROID_CMD.extend(['-smax', str(config.STR_LEN_MAX)])
+if config.SCOPE_CFG_PATH is not None:
+    ICTDROID_CMD.extend(['-d', str(config.DEVICE_SERIAL)])
 
 if not os.path.exists(config.JAVA_PATH):
     print("Java.exe not found!")
@@ -35,10 +38,28 @@ if not os.path.exists(config.ICTDROID_JAR_PATH):
     exit(0)
 
 if not os.path.exists(config.ADB_PATH):
-    print("adb.exe not found!")
+    print("adb executable not found!")
     exit(0)
 
-if os.system(ICTDROID_CMD) != 0:
-    print("Failed to call ICTDroid! cmd={}".format(ICTDROID_CMD))
+if not os.path.exists(config.TEST_BRIDGE_PATH):
+    print("test-bridge.apk not found!")
+    exit(0)
+
+# Install test bridge
+install_cmd = [
+    config.ADB_PATH,
+    'install', '-g', '-t', config.TEST_BRIDGE_PATH,
+]
+proc = subprocess.run(install_cmd, stdout=sys.stdout, stderr=sys.stderr)
+if proc.returncode != 0:
+    print("Failed to install test-bridge.apk!")
+    exit(1)
+
+# Run test generation and dynamic test
+print("Running ICTDroid...")
+print(ICTDROID_CMD)
+proc = subprocess.run(ICTDROID_CMD, cwd=config.ROOT_PATH, stdout=sys.stdout, stderr=sys.stdout)
+if proc.returncode != 0:
+    print("Error when running ICTDroid")
 else:
-    print("Finished calling ICTDroid")
+    print("Finshed running ICTDroid")

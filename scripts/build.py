@@ -4,6 +4,7 @@
 import os
 import platform
 import shutil
+import sys
 import zipfile
 from xml.etree import ElementTree as ET
 
@@ -15,8 +16,8 @@ from log import logger
 class ICTDroidBuilder:
     ANDROID_REPO_URL = 'https://dl.google.com/android/repository/'
 
-    def __init__(self) -> None:
-        logger.enable_file()
+    def __init__(self, target_platform: str) -> None:
+        self.target_platform = target_platform
         self.root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
         self.build_root = os.path.join(self.root_dir, 'build')
         self.apks_root = os.path.join(self.build_root, 'apks')
@@ -115,25 +116,25 @@ class ICTDroidBuilder:
         except KeyboardInterrupt:
             raise
         except Exception:
-            logger.error(TAG, "Failed to fetch Android repository xml!")
+            logger.error(TAG, "Failed to build adb: failed to fetch Android repository xml")
             return
 
         repo_xml = ET.fromstring(repo_xml_text)
         platform_tools_node = repo_xml.find('remotePackage[@path="platform-tools"]')
         if platform_tools_node is None:
-            logger.error(TAG, "Could not find latest platform-tools in repository xml!")
+            logger.error(TAG, "Failed to build adb: could not find latest platform-tools in repository xml")
             return
 
         target_host_os = None
-        if platform.system().lower() == 'linux':
+        if self.target_platform == 'linux':
             target_host_os = 'linux'
-        elif platform.system().lower().startswith('win'):
+        elif self.target_platform.startswith('win'):
             target_host_os = 'windows'
-        elif platform.system().lower().startswith('mac'):
+        elif self.target_platform.startswith('mac'):
             target_host_os = 'macosx'
 
         if target_host_os is None:
-            logger.error(TAG, f"Could not detect host_os: {platform.system().lower()}")
+            logger.error(TAG, f"Failed to build adb: could not detect host_os: {self.target_platform}")
             return
 
         download_url = None
@@ -144,7 +145,7 @@ class ICTDroidBuilder:
             break
 
         if download_url is None:
-            logger.error(TAG, f"Failed to find url of platform-tools for host-os: {target_host_os}")
+            logger.error(TAG, f"Failed to build adb: failed to find url of platform-tools for host-os: {target_host_os}")
             return
 
         download_url = f'{ICTDroidBuilder.ANDROID_REPO_URL}/{download_url}'
@@ -263,7 +264,7 @@ class ICTDroidBuilder:
         readme_path = os.path.join(apks_root, 'README.txt')
         with open(readme_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        logger.info(TAG, "Wrote README.txt to build/apks")
+        logger.info(TAG, "Finished writing README.txt to build/apks")
 
     def write_readme_data(self, data_root: str):
         TAG = 'write_readme_data'
@@ -275,9 +276,18 @@ class ICTDroidBuilder:
         readme_path = os.path.join(data_root, 'README.txt')
         with open(readme_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        logger.info(TAG, "Wrote README.txt to build/data")
+        logger.info(TAG, "Finished writing README.txt to build/data")
 
 
 if __name__ == '__main__':
-    builder = ICTDroidBuilder()
+    TAG = 'main'
+
+    logger.enable_file()
+    if len(sys.argv) > 1:
+        target_platform = sys.argv[1]
+    else:
+        target_platform = platform.system().lower()
+    logger.info(TAG, f"Building ICTDroid for {target_platform}")
+    builder = ICTDroidBuilder(target_platform)
     builder.start()
+    logger.info(TAG, "Finished building ICTDroid")
