@@ -2,8 +2,9 @@
 # ! -*- coding: utf-8 -*-
 
 import logging
-import os
 import logging.config
+import os
+
 import coloredlogs
 
 

@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
 import os
 import shutil
 
 ### Java Path
-JAVA_PATH = shutil.which('java')
-JAVA_8_PATH = 'D:/Programs/jdk-1.8-8u362/bin/java.exe'
+JAVA_PATH = '/path/to/java17+'
+JAVA_8_PATH = '/path/to/java1.8'
 
 ### ICTDroid Properties START
 STRATEGIES = 'base'

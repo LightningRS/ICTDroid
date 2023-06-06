@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
 import json
 import os
 import re
 import shutil
-import sys
-import config
 import subprocess
-from xml.etree import ElementTree as ET
+import sys
 from typing import Dict, List
+from xml.etree import ElementTree as ET
+
+import config
 
 
 def run_apktool(apk_path: str):
@@ -18,7 +19,7 @@ def run_apktool(apk_path: str):
     if os.path.exists(apktool_out_path):
         print(f"[ICTDroid-Mist] APKTool result already exists, skip: {apk_path}")
         return True
-    
+
     ## Run Apktool
     print(f"[ICTDroid-Mist] Start to run ApkTool on: {apk_path}")
     apktool_cmd = [
@@ -33,6 +34,7 @@ def run_apktool(apk_path: str):
         return False
     print(f"[ICTDroid-Mist] Finished running apktool: {apk_path}")
     return True
+
 
 def run_mist(apk_path: str):
     apk_name, _ = os.path.splitext(os.path.basename(apk_path))
@@ -84,7 +86,7 @@ def run_mist(apk_path: str):
     soot_output_path = os.path.join(config.MIST_ROOT_PATH, 'sootOutput')
     if os.path.exists(soot_output_path):
         shutil.rmtree(soot_output_path)
-    
+
     ### Remove duplicated apk
     if os.path.exists(mist_apk_path):
         shutil.rmtree(mist_apk_path)
@@ -92,9 +94,10 @@ def run_mist(apk_path: str):
     if proc.returncode != 0:
         print(f"[ICTDroid-Mist] Failed to run Mist, skip: {apk_path}")
         return False
-    
+
     print(f"[ICTDroid-Mist] Finished running Mist: {apk_path}")
     return True
+
 
 def run_mist_result_analyzer(apk_path: str):
     apk_name, _ = os.path.splitext(os.path.basename(apk_path))
@@ -127,6 +130,7 @@ def run_mist_result_analyzer(apk_path: str):
 
     print(f"[ICTDroid-Mist] Finished running Mist Result Analyzer: {apk_path}")
     return True
+
 
 def classify_ea(facts: Dict[str, bool]):
     if facts['mainAct']:
@@ -167,6 +171,7 @@ def classify_ea(facts: Dict[str, bool]):
         reason = None
     return result, reason
 
+
 def convert_mist_result(apk_path: str):
     apk_name, _ = os.path.splitext(os.path.basename(apk_path))
     print(f"[ICTDroid-Mist] Start to convert Mist result on: {apk_path}")
@@ -193,12 +198,13 @@ def convert_mist_result(apk_path: str):
         res_content += f'reason: {cls_reason}\n'
         res_content += f'result: {cls_result}\n'
         print(f"[ICTDroid-Mist] Finished classifing Mist result on: {f_file}")
-    
+
     mist_res_txt_path = os.path.join(mist_res_path, 'mist_result.txt')
     with open(mist_res_txt_path, 'w', encoding='utf-8') as f:
         f.write(res_content)
     print(f"[ICTDroid-Mist] Finished converting Mist result for apk: {apk_path}")
     return True
+
 
 def merge_mist_result():
     result_files: List[str] = list()
@@ -207,7 +213,7 @@ def merge_mist_result():
             if f_file != 'mist_result.txt':
                 continue
             result_files.append(os.path.join(f_root, f_file))
-            
+
     res_dic = dict()
     for result_file in result_files:
         with open(result_file, 'r', encoding='utf-8') as f:
@@ -222,7 +228,8 @@ def merge_mist_result():
                 apk_name, _ = os.path.splitext(os.path.basename(apk_path))
                 if f'{apk_name}_' in file_name:
                     comp_name = file_name.replace(f'{apk_name}_', '')
-                    manifest_path = os.path.join(config.MIST_RESULT_PATH, f'{apk_name}/manifest/{apk_name}_manifest.xml')
+                    manifest_path = os.path.join(config.MIST_RESULT_PATH,
+                                                 f'{apk_name}/manifest/{apk_name}_manifest.xml')
                     with open(manifest_path, 'r', encoding='utf-8') as f:
                         manifest_xml = ET.parse(f)
                     pkg_name = manifest_xml.getroot().attrib.get('package')
@@ -240,11 +247,11 @@ def merge_mist_result():
                 res_dic[pkg_name] = dict()
             res_dic[pkg_name][comp_name] = result
             i += 1
-    
+
     out_json_path = os.path.join(config.MIST_RESULT_PATH, 'mist_result.json')
     with open(out_json_path, 'w', encoding='utf-8') as f:
         json.dump(res_dic, f, indent=4, sort_keys=True)
-    
+
     shutil.copy(out_json_path, os.path.join(config.DATA_PATH, 'mist_result.json'))
 
     print(f"[ICTDroid-Mist] Finished merging Mist result")
@@ -293,6 +300,6 @@ if __name__ == '__main__':
             continue
         if not convert_mist_result(apk_path):
             continue
-    
+
     # Merge Mist result
     merge_mist_result()

@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
 import os
 import subprocess
 import sys
+
 import config
 
 root_path = os.path.dirname(os.path.dirname(__file__))
@@ -44,17 +45,6 @@ if not os.path.exists(config.ANDROID_LIB_PATH):
 for apk_path in apks_lis:
     apk_name = str(os.path.basename(apk_path))
     apk_basename = apk_name.replace('.apk', '')
-    
-    # ICCBOT_CMD_TEMPLATE = '{config.JAVA_PATH} -Xmx128G -jar "{config.ICCBOT_JAR_PATH}" '
-    # ICCBOT_CMD_TEMPLATE += '-path "{config.APKS_PATH}" -name "{ph_a}" '
-    # ICCBOT_CMD_TEMPLATE += '-androidJar "{config.ANDROID_LIB_PATH}" '
-    # ICCBOT_CMD_TEMPLATE += '-time 2880 -maxPathNumber 100 -client ICCSpecClient '
-    # ICCBOT_CMD_TEMPLATE += '-outputDir "{config.ICCBOT_RESULT_PATH}" '
-    # ICCBOT_CMD_TEMPLATE += '>> "{config.LOG_PATH}/iccbot-{ph_an}.log"'
-    # ICCBOT_CMD_TEMPLATE = ICCBOT_CMD_TEMPLATE.format(
-    #     config=config, ph_a='{apk_name}', ph_an='{apk_basename}'
-    # )
-    # cmd = ICCBOT_CMD_TEMPLATE.format(apk_name=apk_name, apk_basename=apk_basename)
 
     cmd = [
         config.JAVA_PATH, '-Xmx128G', '-jar', config.ICCBOT_JAR_PATH,

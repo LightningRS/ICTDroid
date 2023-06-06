@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
 import os
 import platform
 import shutil
 import zipfile
-import requests
 from xml.etree import ElementTree as ET
 
+import requests
+
 from log import logger
+
 
 class ICTDroidBuilder:
     ANDROID_REPO_URL = 'https://dl.google.com/android/repository/'
@@ -30,7 +32,7 @@ class ICTDroidBuilder:
         self.build_adb()
         self.build_controller()
         self.build_bridge()
-    
+
     def init_dirs(self):
         TAG = 'init_dirs'
 
@@ -43,7 +45,7 @@ class ICTDroidBuilder:
         self.write_readme_data(self.data_root)
         os.makedirs(os.path.join(self.data_root, 'ICCResult'), exist_ok=True)
         os.makedirs(os.path.join(self.data_root, 'Testcases'), exist_ok=True)
-        
+
         os.makedirs(self.lib_path, exist_ok=True)
 
         os.makedirs(self.script_path, exist_ok=True)
@@ -55,7 +57,7 @@ class ICTDroidBuilder:
 
         shutil.rmtree(self.build_root)
         logger.info(TAG, "Finished cleaning all")
-    
+
     def build_iccbot(self):
         TAG = 'build_iccbot'
 
@@ -64,7 +66,7 @@ class ICTDroidBuilder:
         if os.path.exists(iccbot_path) and os.path.exists(iccbot_jar_path):
             logger.info(TAG, "ICCBot.jar already exists, skip build")
             return
-        
+
         # Unzip ICCBot
         iccbot_pack_path = os.path.join(self.root_dir, 'lib/ICCBot.zip')
         if not os.path.exists(iccbot_pack_path):
@@ -76,7 +78,7 @@ class ICTDroidBuilder:
         logger.info(TAG, "Finished unzipping ICCBot")
 
         logger.info(TAG, "Finished building ICCBot")
-    
+
     def build_mist(self):
         TAG = 'build_mist'
 
@@ -86,7 +88,7 @@ class ICTDroidBuilder:
         if os.path.exists(mist_path) and os.path.exists(mist_jar_path) and os.path.exists(apktool_jar_path):
             logger.info(TAG, "Mist.jar already exists, skip build")
             return
-        
+
         # Unzip Mist
         mist_pack_path = os.path.join(self.root_dir, 'lib/Mist.zip')
         if not os.path.exists(mist_pack_path):
@@ -103,7 +105,7 @@ class ICTDroidBuilder:
         logger.info(TAG, "Finished unzipping Mist")
 
         logger.info(TAG, "Finished building Mist")
-    
+
     def build_adb(self):
         TAG = 'build_adb'
 
@@ -115,13 +117,13 @@ class ICTDroidBuilder:
         except Exception:
             logger.error(TAG, "Failed to fetch Android repository xml!")
             return
-        
+
         repo_xml = ET.fromstring(repo_xml_text)
         platform_tools_node = repo_xml.find('remotePackage[@path="platform-tools"]')
         if platform_tools_node is None:
             logger.error(TAG, "Could not find latest platform-tools in repository xml!")
             return
-        
+
         target_host_os = None
         if platform.system().lower() == 'linux':
             target_host_os = 'linux'
@@ -129,22 +131,22 @@ class ICTDroidBuilder:
             target_host_os = 'windows'
         elif platform.system().lower().startswith('mac'):
             target_host_os = 'macosx'
-        
+
         if target_host_os is None:
             logger.error(TAG, f"Could not detect host_os: {platform.system().lower()}")
             return
-        
+
         download_url = None
         for archive_node in platform_tools_node.findall('archives/archive'):
             if archive_node.find('host-os').text != target_host_os:
                 continue
             download_url = archive_node.find('complete/url').text
             break
-        
+
         if download_url is None:
             logger.error(TAG, f"Failed to find url of platform-tools for host-os: {target_host_os}")
             return
-        
+
         download_url = f'{ICTDroidBuilder.ANDROID_REPO_URL}/{download_url}'
         logger.info(TAG, f"Downloading platform-tools from: {download_url}")
         platform_tools_zip = requests.get(download_url)
@@ -176,7 +178,7 @@ class ICTDroidBuilder:
         if mvn_path is None:
             logger.error(TAG, "Failed to build test-controller: mvn not found!")
             return
-        
+
         logger.info(TAG, "Start to build ictdroid.jar")
         os.chdir(ctrl_root)
         ret_code = os.system('mvn clean')
@@ -188,7 +190,7 @@ class ICTDroidBuilder:
             logger.error(TAG, f"Failed to build test-controller: mvn package returned with non-zero code: {ret_code}")
             return
         os.chdir(self.root_dir)
-        
+
         target_path = os.path.join(ctrl_root, 'target')
         jar_path = None
         for f_item in os.listdir(target_path):
@@ -207,7 +209,7 @@ class ICTDroidBuilder:
         target_scripts_path = os.path.join(self.build_root, 'scripts')
         scripts_path = os.path.join(self.root_dir, 'scripts/execute')
         shutil.copytree(scripts_path, target_scripts_path, dirs_exist_ok=True)
-        
+
         logger.info(TAG, "Finished building ictdroid.jar")
 
     def build_bridge(self):
@@ -224,7 +226,7 @@ class ICTDroidBuilder:
         if not os.path.exists(gradlew_path):
             logger.error(TAG, "Failed to build test-bridge: gradlew not found!")
             return
-        
+
         logger.info(TAG, "Start to build test-bridge.apk")
         os.chdir(bridge_root)
         ret_code = os.system(f'.{os.path.sep}gradlew assembleRelease')
@@ -232,7 +234,7 @@ class ICTDroidBuilder:
             logger.error(TAG, f"Failed to build test-bridge: gradlew returned with non-zero code: {ret_code}")
             return
         os.chdir(self.root_dir)
-        
+
         output_path = os.path.join(bridge_root, 'app/build/outputs')
         apk_path = None
         for f_root, _, f_files in os.walk(output_path):
@@ -247,7 +249,7 @@ class ICTDroidBuilder:
         if os.path.exists(target_apk_path):
             os.unlink(target_apk_path)
         shutil.copyfile(apk_path, target_apk_path)
-        
+
         logger.info(TAG, "Finished building test-bridge.apk")
 
     def write_readme_apks(self, apks_root: str):

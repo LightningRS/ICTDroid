@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
-import os
-import config
 import json
+import os
+
+import config
 
 # Summary testcases
 case_sum = 0

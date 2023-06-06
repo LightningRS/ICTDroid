@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
 import os
+
 import config
 
 s_ia = input("Start apkIndex: ")
@@ -40,7 +41,7 @@ if not os.path.exists(config.JAVA_PATH):
     exit(0)
 
 if not os.path.exists(config.ICTDROID_JAR_PATH):
-    print("AACT.jar not found!")
+    print("ictdroid.jar not found!")
     exit(0)
 
 if not os.path.exists(config.ADB_PATH):
@@ -48,6 +49,6 @@ if not os.path.exists(config.ADB_PATH):
     exit(0)
 
 if os.system(ICTDROID_CMD) != 0:
-    print("Failed to call AACT! cmd={}".format(ICTDROID_CMD))
+    print("Failed to call ICTDroid! cmd={}".format(ICTDROID_CMD))
 else:
-    print("Finished calling AACT")
+    print("Finished calling ICTDroid")

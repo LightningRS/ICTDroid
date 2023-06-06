@@ -1,0 +1,4 @@
+coloredlogs~=15.0.1
+requests~=2.28.1
+pydantic~=1.10.2
+pandas~=2.0.1

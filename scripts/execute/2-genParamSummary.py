@@ -1,19 +1,18 @@
 #!/usr/bin/python3
-#! -*- coding: utf-8 -*-
+# ! -*- coding: utf-8 -*-
 
-import os
-import config
-
-#!/usr/bin/python3
-#! -*- coding: utf-8 -*-
-
-from typing import Dict
-from xml.etree import cElementTree as ET
 import json
 import os
-import sys
+from typing import Dict
+from xml.etree import cElementTree as ET
+
+import config
+
+# !/usr/bin/python3
+# ! -*- coding: utf-8 -*-
 
 ENTRY_METHODS = ['onCreate', 'onStart', 'onResume']
+
 
 def transform_xml(xml_path: str):
     print("Loading XML...")
@@ -22,13 +21,13 @@ def transform_xml(xml_path: str):
     print("Load XML OK!")
 
     activities = set([x.attrib.get('source').strip() \
-        for x in xml.findall('Component')])
-    
+                      for x in xml.findall('Component')])
+
     intent_summaries = xml.findall('.//intentSummary')
     summary: Dict[str, list] = dict()
     for activity in activities:
         summary[activity] = []
-    
+
     id = 0
     for intent_summary in intent_summaries:
         method = intent_summary.find('method').attrib.get('value')
@@ -48,7 +47,7 @@ def transform_xml(xml_path: str):
             activity = intent_summary.find('source').attrib.get('name')
             method_trace = intent_summary.find('methodtrace').attrib.get('value')
             path_dic['trace'] = ';'.join(x.split()[-1] for x in method_trace.split(','))
-            
+
             receiver = intent_summary.find('receiveICCInfo')
             if receiver is None:
                 receiver = intent_summary.find('receiver')
@@ -56,7 +55,7 @@ def transform_xml(xml_path: str):
             if 'extras' in keys:
                 keys.remove('extras')
                 path_dic['params'] = keys + list(
-                    filter(lambda x : x, receiver.attrib.get('extras').split(','))
+                    filter(lambda x: x, receiver.attrib.get('extras').split(','))
                 )
             else:
                 path_dic['params'] = keys
@@ -66,6 +65,7 @@ def transform_xml(xml_path: str):
         json.dump(summary, f, indent=4, sort_keys=True)
     print("Transformed to [{}]".format(os.path.abspath(json_path)))
 
+
 if __name__ == '__main__':
     for f_root, f_dirs, f_files in os.walk(config.ICCBOT_RESULT_PATH):
         for f_file in f_files:
@@ -74,4 +74,3 @@ if __name__ == '__main__':
                 print("Transforming [{}]...".format(os.path.abspath(xml_path)))
                 transform_xml(xml_path)
                 print("Transform OK!")
-    
