@@ -5,3 +5,4 @@ logs/
 __pycache__
 lib/platform-tools.zip
 .idea
+temp/
